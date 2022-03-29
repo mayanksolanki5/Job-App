@@ -8,17 +8,7 @@ class UserController extends Controller
 {
     public function index()
     {   
-        return view('index');
-    }
-
-    public function register()
-    {   
-        return view('register');
-    }
-
-    public function login()
-    {   
-        return view('login');
+        return view('welcome');
     }
 
 }
