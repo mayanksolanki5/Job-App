@@ -44,8 +44,19 @@ class HomeController extends Controller
                          'password'=>$request->input('password'),
                          ]
                         );
-            return redirect()->back();            
+            return redirect()->back()->with('message','Updated Sucessfully!');            
     }    
+
+    // public function upload(Request $request)
+    // {
+    //     if($request->hasFile('image')){
+    //         $filename = $request->image->getClientOriginalName();
+    //         dd($filename);
+    //         $request->image->storeAs('images', $filename, 'public');  
+    //         auth()->user()->update(['avtar' => $filname]); 
+    //     }
+    // }
+
 
     public function profile()
     {

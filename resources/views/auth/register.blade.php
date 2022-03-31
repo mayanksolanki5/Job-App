@@ -192,6 +192,17 @@
                             </div>
                         </div>
 
+                        <!-- <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Upload Image') }}</label>
+
+                            <div class="col-md-6">
+                                <form action="/upload" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="image" />
+                                    <input type="submit" value="upload" />
+                                </form>
+                            </div>
+                        </div> -->
 
 
 

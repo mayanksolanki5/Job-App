@@ -11,4 +11,13 @@ class UserController extends Controller
         return view('welcome');
     }
 
+    public function loginpage()
+    {
+        return view('template.login');
+    }
+
+    public function registerpage()
+    {
+        return view('template.register');
+    }
 }

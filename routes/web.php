@@ -18,7 +18,8 @@ Route::get('/', 'UserController@index')->name('index');
 
 // Route::get('/logout', 'HomeController@logout')->name('logout');
 
-// Route::post('login',[UserController::class,'login'])->name('login');
+Route::get('/loginpage','UserController@loginpage')->name('loginpage');
+Route::get('/registerpage','UserController@registerpage')->name('registerpage');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -29,3 +30,4 @@ Auth::routes();
 Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::post('/update', 'HomeController@update')->name('update');
+
