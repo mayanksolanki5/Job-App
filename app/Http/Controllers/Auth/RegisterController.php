@@ -29,8 +29,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    
     protected $redirectTo = RouteServiceProvider::HOME;
-
+    
     /**
      * Create a new controller instance.
      *
@@ -41,6 +42,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,8 +52,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'max:255'],
+            'number' => ['required', 'min:10', 'string', 'max:10'],
+            'birthday' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'experience' => ['required', 'string', 'max:255'],
+            'position' => ['required', 'string', 'max:255'],
+            'salary' => ['required', 'string', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,8 +74,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'address' => $data['address'],
+            'number' => $data['number'],
+            'birthday' => $data['birthday'],
             'email' => $data['email'],
+            'experience' => $data['experience'],
+            'position' => $data['position'],
+            'salary' => $data['salary'],
             'password' => Hash::make($data['password']),
         ]);
     }

@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{route('index')}}">
+        <a class="nav-link " href="{{route('home')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -12,27 +12,31 @@
       
       <!-- <li class="nav-heading">Pages</li> -->
 
-    <!--  <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+     <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('profile') }}">
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span>Edit Profile</span>
         </a>
-      </li> End Profile Page Nav -->
+      </li>
 
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('register')}}">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
-      </li><!-- End Register Page Nav -->
+      </li> -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('login')}}">
+        <a class="nav-link collapsed" onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();" href="{{ route('logout') }}">
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>                     
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
+          {{ __('Logout') }}
         </a>
-      </li><!-- End Login Page Nav -->
+      </li>
     </ul>
 
   </aside><!-- End Sidebar-->

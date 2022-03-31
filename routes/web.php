@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'UserController@index')->name('index');
 
-Auth::routes();
+// Route::get('/logout', 'HomeController@logout')->name('logout');
+
+// Route::post('login',[UserController::class,'login'])->name('login');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::post('/registerpage','HomeController@logincall')->name('registerpage') ;
+
+Auth::routes();
+
+Route::get('/profile', 'HomeController@profile')->name('profile');
+
+Route::post('/update', 'HomeController@update')->name('update');
