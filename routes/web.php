@@ -25,6 +25,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::post('/registerpage','HomeController@logincall')->name('registerpage') ;
 
+Route::get('/forgotpassword', 'UserController@forgotpassword')->name('forgotpassword');
+Route::post('/verifyemail', 'UserController@verifyemail')->name('verifyemail');
+Route::get('/resetpassword', 'UserController@resetpassword')->name('resetpassword');
+Route::post('/resetpwd', 'UserController@resetpwd')->name('resetpwd');
+
 Auth::routes();
 
 Route::get('/profile', 'HomeController@profile')->name('profile');

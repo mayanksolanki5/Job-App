@@ -19,6 +19,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('resetpassword') }}">
+          <i class="bi bi-person"></i>
+          <span>Reset Password</span>
+        </a>
+      </li>
+
 
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('register')}}">

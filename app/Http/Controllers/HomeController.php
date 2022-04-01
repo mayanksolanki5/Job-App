@@ -31,6 +31,7 @@ class HomeController extends Controller
 
     public function update(Request $request){
         $id = auth()->user()->id;
+
         User::where('id', $id)
                 ->update(['firstname' => $request->input('firstname'),
                          'lastname'=>$request->input('lastname'),
@@ -40,12 +41,13 @@ class HomeController extends Controller
                          'email'=>$request->input('email'),   
                          'experience'=>$request->input('experience'),
                          'position'=>$request->input('position'),
-                         'salary'=>$request->input('salary'),
-                         'password'=>$request->input('password'),
+                         'salary'=>$request->input('salary')
                          ]
                         );
             return redirect()->back()->with('message','Updated Sucessfully!');            
     }    
+
+
 
     // public function upload(Request $request)
     // {
@@ -56,7 +58,6 @@ class HomeController extends Controller
     //         auth()->user()->update(['avtar' => $filname]); 
     //     }
     // }
-
 
     public function profile()
     {

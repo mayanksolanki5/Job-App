@@ -59,52 +59,42 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Password Reset</h5>
+                    <p class="text-center small">Enter valid Email-Address</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" action="{{ route('login') }}">
+                  <form class="row g-3 needs-validation" method="POST" action="{{ route('verifyemail') }}">
                       @csrf
+
+                    <x-alert />  
 
                     <div class="col-12">
                       <label for="email" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <!-- <input type="text" name="username" class="form-control" id="yourUsername" required> -->
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        <!-- <div class="invalid-feedback">Please enter your username.</div> -->
                       </div>
                     </div>
 
-
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
-                      <!-- <input type="password" name="password" class="form-control" id="yourPassword" required> -->
-                      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                      <!-- <div class="invalid-feedback">Please enter your password!</div> -->
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                      <label for="password" class="form-label">Enter new password</label>
+                      <div class="input-group has-validation">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
                       </div>
                     </div>
+
+                    <div class="col-12">
+                        <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
+                        <div class="input-group has-validation">
+                            <input id="password-confirm" type="password" class="form-control" name="password-confirm" required autocomplete="new-password">
+                        </div>
+                    </div>
+
 
                     <div class="col-12">
                       <!-- <button class="btn btn-primary w-100" type="submit">Login</button> -->
-                      <button type="submit" class="btn btn-primary">Login</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-
-                    <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="{{ route('register') }}">Create an account</a></p>
-                    </div>
-
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('forgotpassword') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
 
                   </form>
 
