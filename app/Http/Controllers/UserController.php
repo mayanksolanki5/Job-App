@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use DataTables;
 
 class UserController extends Controller
 {
@@ -81,6 +81,54 @@ class UserController extends Controller
         //     return redirect()->back()->with('error', 'You have enterd wrong Password!');            
         // }
     }
+
+
+    
+    public function table(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($data){
+
+                           $btn = '<a href="/edit/'. $data->id .'" name="edit" class="edit btn btn-primary btn-sm">Edit</a><button name="delete" data-id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+     
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('users');
+    }
+
+
+    public function destroy($id)
+    {
+        User::find($id)->delete($id);
+
+        // return response()->json([
+        //     'success' => 'Record deleted successfully!'
+        // ]);
+        // DB::table('table_name')->where('id', $id)->delete();
+    }
+
+
+    // public function edit($id)
+    // {
+    //     return view('edituser')->with('id', $id); 
+    // }
+
+    public function edit(Request $request, $id)
+    {
+        return view('edituser')->with('dataa', User::all())->with('id', $id); 
+    }
+
+
+
+
+
 
 
     public function loginpage()

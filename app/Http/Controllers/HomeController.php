@@ -47,6 +47,23 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Updated Sucessfully!');            
     }    
 
+    public function updateall(Request $request,$id){
+        
+        User::where('id', $id)
+                ->update(['firstname' => $request->input('firstname'),
+                         'lastname'=>$request->input('lastname'),
+                         'address'=>$request->input('address'),
+                         'number'=>$request->input('number'),
+                         'birthday'=>$request->input('birthday'),
+                         'email'=>$request->input('email'),   
+                         'experience'=>$request->input('experience'),
+                         'position'=>$request->input('position'),
+                         'salary'=>$request->input('salary')
+                         ]
+                        );
+            return redirect()->back()->with('message','Updated Sucessfully!');            
+    }    
+
 
 
     // public function upload(Request $request)

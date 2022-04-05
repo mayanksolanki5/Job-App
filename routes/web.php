@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,3 +36,11 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::post('/update', 'HomeController@update')->name('update');
 
+Route::get('users', ['uses'=>'UserController@table', 'as'=>'users.index']);
+
+
+Route::post('/delete/{id}', 'UserController@destroy');
+Route::get('/edit/{id}', 'UserController@edit');
+Route::post('/updateall/{id}','HomeController@updateall');
+// Route::get('deleteuser',[UserController::class,'deleteuser'])->name('deleteuser');
+// Route::get('edituser',[UserController::class,'edituser'])->name('edituser');
