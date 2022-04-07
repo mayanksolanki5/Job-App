@@ -1,15 +1,15 @@
+@extends('layouts.header')
+@extends('layouts.sidebar')
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status</title>
+      <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
@@ -29,55 +29,53 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+        #container{
+            margin-top: 100px;
+            margin-right: 100px;
+        }
+    </style>
+
 </head>
+
 
 <body>
 
-    @extends('layouts.header')
-    @extends('layouts.sidebar')
+<div class="container" id="container">
+        <div class="row justify-content-end">
+            <div class="col-md-8">
+                <div class="card">
 
 
-  <main id="main" class="main">
+    @foreach($dataa as $data)
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+    @if($id == $data->id)
+        @if($data->active)
+        <h1>Status :  Active</h1>
+        <a href="/inactive/{{$data->id}}">In-active Status</a>
+        
+        @else
+        <h1>Status : In-active</h1>
+        <a href="/active/{{$data->id}}">Active Status</a>
 
-    <section class="section dashboard">
-      <div class="row">
+        @endif
+    @endif    
+    @endforeach
 
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
+    <!-- <div class="form-group row m-2">
+        <div class="col-md-6 offset-md-4">
+            <a class="btn btn-primary btn-sm m-2" href="{{ route('users.index') }}">
+            {{ __('User Table') }}
+            </a>
+        </div>
+    </div> -->
 
-          </div>
-        </div><!-- End Left side columns -->
+            </div>
+        </div>
+    </div>
+</div>
 
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-
-        </div><!-- End Right side columns -->
-
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</body>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
@@ -92,6 +90,5 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script>
 
-</body>
 
 </html>

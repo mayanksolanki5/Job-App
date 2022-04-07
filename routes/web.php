@@ -14,33 +14,44 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::get('/', 'UserController@index')->name('index');
+Route::get('/', 'UserController@index')->name('index')->middleware('authcheck');
+
+Route::post('/loginverify','UserController@loginverify')->name('loginverify')->middleware('authcheck');
 
 // Route::get('/logout', 'HomeController@logout')->name('logout');
 
-Route::get('/loginpage','UserController@loginpage')->name('loginpage');
-Route::get('/registerpage','UserController@registerpage')->name('registerpage');
+Route::get('/loginpage','UserController@loginpage')->name('loginpage')->middleware('authcheck');
+Route::get('/registerpage','UserController@registerpage')->name('registerpage')->middleware('authcheck');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('authcheck')->middleware('statuscheck');
 
 // Route::post('/registerpage','HomeController@logincall')->name('registerpage') ;
 
 Route::get('/forgotpassword', 'UserController@forgotpassword')->name('forgotpassword');
 Route::post('/verifyemail', 'UserController@verifyemail')->name('verifyemail');
-Route::get('/resetpassword', 'UserController@resetpassword')->name('resetpassword');
-Route::post('/resetpwd', 'UserController@resetpwd')->name('resetpwd');
+Route::get('/resetpassword', 'UserController@resetpassword')->name('resetpassword')->middleware('authcheck')->middleware('statuscheck');
+Route::post('/resetpwd', 'UserController@resetpwd')->name('resetpwd')->middleware('authcheck');
 
 Auth::routes();
 
-Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/profile', 'HomeController@profile')->name('profile')->middleware('authcheck')->middleware('statuscheck');
 
-Route::post('/update', 'HomeController@update')->name('update');
+Route::post('/update', 'HomeController@update')->name('update')->middleware('authcheck');
 
-Route::get('users', ['uses'=>'UserController@table', 'as'=>'users.index']);
+Route::get('users', ['uses'=>'UserController@table', 'as'=>'users.index'])->middleware('authcheck')->middleware('statuscheck');
 
 
-Route::post('/delete/{id}', 'UserController@destroy');
-Route::get('/edit/{id}', 'UserController@edit');
-Route::post('/updateall/{id}','HomeController@updateall');
+Route::post('/delete/{id}', 'UserController@destroy')->middleware('authcheck');
+Route::get('/edit/{id}', 'UserController@edit')->middleware('authcheck')->middleware('statuscheck');
+Route::get('/loginstatus/{id}','UserController@loginstatus')->middleware('authcheck')->middleware('statuscheck');
+
+Route::get('/inactive/{id}','UserController@inactive')->middleware('authcheck');
+Route::get('/active/{id}','UserController@active')->middleware('authcheck');
+
+
+
+
+Route::post('/updateall/{id}','HomeController@updateall')->middleware('authcheck');
+
 // Route::get('deleteuser',[UserController::class,'deleteuser'])->name('deleteuser');
 // Route::get('edituser',[UserController::class,'edituser'])->name('edituser');

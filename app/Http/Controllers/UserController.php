@@ -47,6 +47,24 @@ class UserController extends Controller
         
     }
 
+    public function loginverify(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+
+        $user = User::where('email', $email)->first();
+        $user1 = User::where('password', $password)->first();
+        
+
+        if($user && $user1){
+            return view('admin.dashboard');
+        }
+     
+    }
+
+
+
+
     public function resetpassword()
     {
         return view('resetpassword');
@@ -82,8 +100,6 @@ class UserController extends Controller
         // }
     }
 
-
-    
     public function table(Request $request)
     {
         if ($request->ajax()) {
@@ -92,7 +108,11 @@ class UserController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
 
-                           $btn = '<a href="/edit/'. $data->id .'" name="edit" class="edit btn btn-primary btn-sm">Edit</a><button name="delete" data-id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                            $btn = '<a href="/edit/'. $data->id .'" name="edit" class="edit btn btn-primary btn-sm">Edit</a>
+                                    <button name="delete" data-id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                            
+                            // $btn .= '<input class="form-check-input" style="margin:5px" type="checkbox" checked/>';        
+                            $btn .= '<a href="/loginstatus/'. $data->id .'" style="margin:5px">Status</a>';        
      
                             return $btn;
                     })
@@ -125,8 +145,22 @@ class UserController extends Controller
         return view('edituser')->with('dataa', User::all())->with('id', $id); 
     }
 
+    public function loginstatus(Request $request,$id){
+        return view('loginstatus')->with('dataa', User::all())->with('id',$id);
+    }
 
+    public function active($id)
+    {
+        User::find($id)->update(['active' => true]);
+        return redirect()->back();
+    }
 
+    public function inactive($id)
+    {
+        User::find($id)->update(['active' => false]);
+        return redirect()->back();
+        // return view('auth.login');
+    }
 
 
 

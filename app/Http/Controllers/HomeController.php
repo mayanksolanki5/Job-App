@@ -26,6 +26,17 @@ class HomeController extends Controller
     public function index()
     {
         return view('admin.dashboard');
+        // $status = auth()->user()->active;
+        // // print_r(auth()->user()->active);
+        // // die;
+        // if($status == 1){
+        //     return view('admin.dashboard');
+        // }
+        // else{
+        //     auth()->logout();
+        //     return view('auth.login');
+        // }
+
         // return view('home');
     }
 
@@ -64,6 +75,8 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Updated Sucessfully!');            
     }    
 
+    
+    
 
 
     // public function upload(Request $request)
