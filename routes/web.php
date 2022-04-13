@@ -48,10 +48,49 @@ Route::get('/loginstatus/{id}','UserController@loginstatus')->middleware('authch
 Route::get('/inactive/{id}','UserController@inactive')->middleware('authcheck');
 Route::get('/active/{id}','UserController@active')->middleware('authcheck');
 
-
-
-
 Route::post('/updateall/{id}','HomeController@updateall')->middleware('authcheck');
 
 // Route::get('deleteuser',[UserController::class,'deleteuser'])->name('deleteuser');
 // Route::get('edituser',[UserController::class,'edituser'])->name('edituser');
+
+
+    // For PDF
+Route::get('/generate-pdf/{id}','PDFController@generatePDF');
+Route::get('/generate-pdfallusers','PDFController@generatePdfAllUsers');
+
+    // For csv
+Route::get('export', 'MyController@export')->name('export');
+Route::get('exportxl', 'MyController@exportxl')->name('exportxl');
+
+Route::get('importExportView', 'MyController@importExportView');
+Route::post('import', 'MyController@import')->name('import');
+
+
+Route::get('createjob','CreatejobController@createjob')->name('createjob');
+
+Route::post('submitjob','CreatejobController@submitjob')->name('submitjob');
+
+
+Route::get('jobs', ['uses'=>'CreatejobController@index', 'as'=>'jobs.index']);
+
+Route::get('/editjob/{id}', 'CreatejobController@editjob');
+Route::get('/deletejob/{id}', 'CreatejobController@deletejob');
+Route::post('/updatejob/{id}','CreatejobController@updatejob');
+
+Route::get('createcategory','CategoryController@createcategory')->name('createcategory');
+Route::get('categoryview','CategoryController@categoryview')->name('categoryview');
+Route::post('addcategory','CategoryController@addcategory')->name('addcategory');
+
+Route::get('createfunctional','FunctionalController@createfunctional')->name('createfunctional');
+Route::get('functionalview','FunctionalController@functionalview')->name('functionalview');
+Route::post('addfunctional','FunctionalController@addfunctional')->name('addfunctional');
+
+
+Route::get('/deletecategory/{id}', 'CategoryController@delete');
+Route::get('/editcategory/{id}', 'CategoryController@edit');
+Route::post('/updatecategory/{id}', 'CategoryController@update');
+
+Route::get('/deletefunctional/{id}', 'FunctionalController@delete');
+Route::get('/editfunctional/{id}', 'FunctionalController@edit');
+Route::post('/updatefunctional/{id}', 'FunctionalController@update');
+

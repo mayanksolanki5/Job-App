@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 7 Datatables Tutorial - ItSolutionStuff.com</title>
+    <title>Laravel 7 Datatables</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
       <!-- Favicons -->
@@ -47,44 +47,35 @@
         }
     </style>
 
-
 <body>
-    
     
 <div class="content" id="container">
     <div class="row justify-content-end">
         <div class="col-md-9">
-            <div>
-                <span style="font-size:25px">Download All Data : </span>
-                <a href="/generate-pdfallusers" name="pdf" class="btn btn-primary btn-sm">PDF</a>
-                <a class="btn btn-warning btn-sm" href="{{ route('export') }}">CSV</a>
-                <a class="btn btn-primary btn-sm" href="{{ route('exportxl') }}">XL</a>
-            </div>
 
-            <div class="card-body">
-                <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="file" name="file" class="form-control">
-                    <br>
-                    <button class="btn btn-success">Import User Data</button>
-                </form>
-            </div>
-
+        <div class="m-2">
+            <a href="{{ route('createjob') }}" class="btn btn-primary btn-sm">Add Job +</a>
+        </div>
             
             @if(Session::has('message'))
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                <p class="alert {{ Session::get('alert-class', 'alert-sucess') }}">{{ Session::get('message') }}</p>
             @endif
-
+            
 
 
                 <table id="user_table" class="table table-bordered data-table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Job_title</th>
+                            <!-- <th>Job_location</th>
+                            <th>Job_time</th>
+                            <th>Work_from_home</th>
+                            <th>Vacancies</th>
+                            <th>Gender</th>
+                            <th>Qualification</th>
+                            <th>Skills</th> -->
                             <th>Action</th>
-                            <th>PDF</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,6 +86,7 @@
 </div>
 
 
+   
 </body>
    
 <script type="text/javascript">
@@ -103,45 +95,22 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('users.index') }}",
+        ajax: "{{ route('jobs.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'firstname', name: 'name'},
-            {data: 'email', name: 'email'},
+            {data: 'job_title', name: 'job_title'},
+            // {data: 'location', name: 'location'},
+            // {data: 'job_time', name: 'job_time'},
+            // {data: 'work_from_home', name: 'work_from_home'},
+            // {data: 'vacancies', name: 'vacancies'},
+            // {data: 'gender', name: 'gender'},
+            // {data: 'qualification', name: 'qualification'},
+            // {data: 'skill', name: 'skill'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
-            {data: 'pdf', name: 'pdf', orderable: false, searchable: false},
         ]
     });
     
   });
-</script>
-
-
-<script>
-    
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
-    });
-        $('#user_table tbody').on('click', '.delete',
-     function (){ 
-                     var id = $(this).data("id");
-                     var token = $("meta[name='csrf-token']").attr("content");
-                        $.ajax(
-                        {
-                                    url: 'delete/'+id,
-                                    type: 'post',       
-                                    data: {
-                                        "id": id,
-                                        "_token": token,
-                                    },
-                                    success: function (){
-                                        $('#user_table').DataTable().ajax.reload();
-                                    }
-                            });
-                 });
-
-
-
 </script>
 
 
@@ -157,6 +126,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script>
+
 
 
 </html>

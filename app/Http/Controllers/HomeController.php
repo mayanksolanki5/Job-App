@@ -75,8 +75,6 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Updated Sucessfully!');            
     }    
 
-    
-    
 
 
     // public function upload(Request $request)
@@ -93,4 +91,5 @@ class HomeController extends Controller
     {
         return view('profile');
     }
+
 }

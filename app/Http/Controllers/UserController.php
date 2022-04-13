@@ -113,10 +113,14 @@ class UserController extends Controller
                             
                             // $btn .= '<input class="form-check-input" style="margin:5px" type="checkbox" checked/>';        
                             $btn .= '<a href="/loginstatus/'. $data->id .'" style="margin:5px">Status</a>';        
-     
+                            
                             return $btn;
+                        })
+                    ->addColumn('pdf', function($data){
+                        $pdfBtn = '<a href="/generate-pdf/'. $data->id .'" name="pdf" class="edit btn btn-primary btn-sm">PDF</a>';        
+                        return $pdfBtn;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','pdf'])
                     ->make(true);
         }
       
@@ -161,6 +165,14 @@ class UserController extends Controller
         return redirect()->back();
         // return view('auth.login');
     }
+
+
+
+    
+
+
+
+
 
 
 
