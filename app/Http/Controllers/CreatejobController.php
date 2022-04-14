@@ -80,7 +80,7 @@ class CreatejobController extends Controller
         // return view('editjob')->with('dataa', Createjob::all())->with('id', $id); 
         // return view('editjob')->with('dataa', Createjob::where('id', $id)->first()); 
     }
-
+    
     public function updatejob(Request $request,$id){
         
         Createjob::where('id', $id)

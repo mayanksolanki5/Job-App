@@ -94,3 +94,7 @@ Route::get('/deletefunctional/{id}', 'FunctionalController@delete');
 Route::get('/editfunctional/{id}', 'FunctionalController@edit');
 Route::post('/updatefunctional/{id}', 'FunctionalController@update');
 
+
+
+Route::get('auth/google', 'GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');
