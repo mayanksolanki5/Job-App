@@ -55,46 +55,51 @@ Route::post('/updateall/{id}','HomeController@updateall')->middleware('authcheck
 
 
     // For PDF
-Route::get('/generate-pdf/{id}','PDFController@generatePDF');
-Route::get('/generate-pdfallusers','PDFController@generatePdfAllUsers');
+Route::get('/generate-pdf/{id}','PDFController@generatePDF')->middleware('authcheck')->middleware('statuscheck');
+Route::get('/generate-pdfallusers','PDFController@generatePdfAllUsers')->middleware('authcheck')->middleware('statuscheck');
 
     // For csv
-Route::get('export', 'MyController@export')->name('export');
-Route::get('exportxl', 'MyController@exportxl')->name('exportxl');
+Route::get('export', 'MyController@export')->name('export')->middleware('authcheck')->middleware('statuscheck');
+Route::get('exportxl', 'MyController@exportxl')->name('exportxl')->middleware('authcheck')->middleware('statuscheck');
 
-Route::get('importExportView', 'MyController@importExportView');
-Route::post('import', 'MyController@import')->name('import');
-
-
-Route::get('createjob','CreatejobController@createjob')->name('createjob');
-
-Route::post('submitjob','CreatejobController@submitjob')->name('submitjob');
+Route::get('importExportView', 'MyController@importExportView')->middleware('authcheck')->middleware('statuscheck');
+Route::post('import', 'MyController@import')->name('import')->middleware('authcheck')->middleware('statuscheck');
 
 
-Route::get('jobs', ['uses'=>'CreatejobController@index', 'as'=>'jobs.index']);
+Route::get('createjob','CreatejobController@createjob')->name('createjob')->middleware('authcheck');
 
-Route::get('/editjob/{id}', 'CreatejobController@editjob');
-Route::get('/deletejob/{id}', 'CreatejobController@deletejob');
-Route::post('/updatejob/{id}','CreatejobController@updatejob');
-
-Route::get('createcategory','CategoryController@createcategory')->name('createcategory');
-Route::get('categoryview','CategoryController@categoryview')->name('categoryview');
-Route::post('addcategory','CategoryController@addcategory')->name('addcategory');
-
-Route::get('createfunctional','FunctionalController@createfunctional')->name('createfunctional');
-Route::get('functionalview','FunctionalController@functionalview')->name('functionalview');
-Route::post('addfunctional','FunctionalController@addfunctional')->name('addfunctional');
+Route::post('submitjob','CreatejobController@submitjob')->name('submitjob')->middleware('authcheck');
 
 
-Route::get('/deletecategory/{id}', 'CategoryController@delete');
-Route::get('/editcategory/{id}', 'CategoryController@edit');
-Route::post('/updatecategory/{id}', 'CategoryController@update');
+Route::get('jobs', ['uses'=>'CreatejobController@index', 'as'=>'jobs.index'])->middleware('authcheck')->middleware('statuscheck');
 
-Route::get('/deletefunctional/{id}', 'FunctionalController@delete');
-Route::get('/editfunctional/{id}', 'FunctionalController@edit');
-Route::post('/updatefunctional/{id}', 'FunctionalController@update');
+Route::get('/editjob/{id}', 'CreatejobController@editjob')->middleware('authcheck');
+Route::get('/deletejob/{id}', 'CreatejobController@deletejob')->middleware('authcheck');
+Route::post('/updatejob/{id}','CreatejobController@updatejob')->middleware('authcheck');
+
+Route::get('createcategory','CategoryController@createcategory')->name('createcategory')->middleware('authcheck')->middleware('statuscheck');
+Route::get('categoryview','CategoryController@categoryview')->name('categoryview')->middleware('authcheck');
+Route::post('addcategory','CategoryController@addcategory')->name('addcategory')->middleware('authcheck');
+
+Route::get('createfunctional','FunctionalController@createfunctional')->name('createfunctional')->middleware('authcheck')->middleware('statuscheck');
+Route::get('functionalview','FunctionalController@functionalview')->name('functionalview')->middleware('authcheck');
+Route::post('addfunctional','FunctionalController@addfunctional')->name('addfunctional')->middleware('authcheck');
+
+
+Route::get('/deletecategory/{id}', 'CategoryController@delete')->middleware('authcheck');
+Route::get('/editcategory/{id}', 'CategoryController@edit')->middleware('authcheck');
+Route::post('/updatecategory/{id}', 'CategoryController@update')->middleware('authcheck');
+
+Route::get('/deletefunctional/{id}', 'FunctionalController@delete')->middleware('authcheck');
+Route::get('/editfunctional/{id}', 'FunctionalController@edit')->middleware('authcheck');
+Route::post('/updatefunctional/{id}', 'FunctionalController@update')->middleware('authcheck');
 
 
 
 Route::get('auth/google', 'GoogleController@redirectToGoogle');
 Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');
+
+Route::get('jobList', 'ApplyJobController@index')->name('jobList')->middleware('authcheck')->middleware('statuscheck');
+Route::get('/viewjob/{id}', 'ApplyJobController@viewjob')->middleware('authcheck');
+Route::get('/applyjob/{id}', 'ApplyJobController@applyjob')->middleware('authcheck');
+Route::post('/applyjob/submit/{id}', 'ApplyJobController@submit')->middleware('authcheck');

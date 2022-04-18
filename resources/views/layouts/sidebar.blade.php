@@ -54,6 +54,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('jobList') }}">
+          <i class="bi bi-person"></i>
+          <span>Job List</span>
+        </a>
+      </li>
+
 
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('register')}}">
