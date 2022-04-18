@@ -432,7 +432,29 @@
         return /^[1-9][0-9]?$|^50$/.test(value);   
     });
 
-  
+    // $.validator.addMethod('le', function (value, element, param) {
+    //     return this.optional(element) || value <= $(param).val();
+    // }, 'Invalid value');
+
+
+    // $.validator.addMethod('totalCheck', function(value, element, params) {
+    //     var field_1 = $('input[name="' + params[0] + '"]').val(),
+    //         field_2 = $('input[name="' + params[1] + '"]').val();
+    //     return parseInt(value) === parseInt(field_1) + parseInt(field_2);
+    // }, "Enter the number of persons (including yourself)");
+
+
+
+    // $.validator.addMethod('glCheck', function(value, element, params) {
+    //     var field_1 = $('input[name="' + params[0] + '"]').val(),
+    //     var field_2 = $('input[name="' + params[1] + '"]').val();
+    //         if(parseInt(field_1) === parseInt(field_2)){
+    //             return  false;
+    //         }
+    //         else{
+    //             return true;
+    //         }
+    // });
 
 
 </script>
