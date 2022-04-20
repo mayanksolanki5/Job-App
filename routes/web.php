@@ -77,6 +77,12 @@ Route::get('/editjob/{id}', 'CreatejobController@editjob')->middleware('authchec
 Route::get('/deletejob/{id}', 'CreatejobController@deletejob')->middleware('authcheck');
 Route::post('/updatejob/{id}','CreatejobController@updatejob')->middleware('authcheck');
 
+
+Route::get('/participants/{id}', 'CreatejobController@participants')->middleware('authcheck');
+Route::get('/participants/details/{id}', 'CreatejobController@participantDetail')->middleware('authcheck');
+
+
+
 Route::get('createcategory','CategoryController@createcategory')->name('createcategory')->middleware('authcheck')->middleware('statuscheck');
 Route::get('categoryview','CategoryController@categoryview')->name('categoryview')->middleware('authcheck');
 Route::post('addcategory','CategoryController@addcategory')->name('addcategory')->middleware('authcheck');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Createjob;
 use App\Functional;
 use App\Category;
+use App\applyJob;
 use DataTables;
 
 
@@ -61,7 +62,8 @@ class CreatejobController extends Controller
                     ->addColumn('action', function($data){
    
                            $btn = '<a href="/editjob/'. $data->id .'" name="edit" class="edit btn btn-primary btn-sm">Edit</a>
-                                    <a href="/deletejob/'. $data->id .'" name="delete" class="edit btn btn-danger btn-sm">Delete</a>';
+                                    <a href="/deletejob/'. $data->id .'" name="delete" class="edit btn btn-danger btn-sm">Delete</a>
+                                    <a href="/participants/'. $data->id .'" name="participants" class="btn btn-success btn-sm">Participants</a>';
      
                             return $btn;
                     })
@@ -115,10 +117,39 @@ class CreatejobController extends Controller
     {
         $user=Createjob::find($id);
         $user->delete();
-
+        
         session()->flash('message', 'Data Deleted!'); 
         session()->flash('alert-class', 'alert-danger'); 
-
+        
         return redirect()->back();
+    }
+    
+    public function participants($id, Request $request)
+    {
+        // $users = Createjob::find($id)->applyJob;
+        // return view('participants')->with('users', $users);
+
+        if ($request->ajax()) {
+            $data = Createjob::find($id)->applyJob;
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($data){
+   
+                           $btn = '<a href="/participants/details/'. $data->id .'" name="details" class="edit btn btn-primary btn-sm">Details</a>';
+     
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('participants');
+        
+    }
+
+    public function participantDetail($id)
+    {
+        $user = applyJob::find($id);
+        return view('participantDetail')->with('user', $user);
     }
 }
