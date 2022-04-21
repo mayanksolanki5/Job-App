@@ -109,3 +109,5 @@ Route::get('jobList', 'ApplyJobController@index')->name('jobList')->middleware('
 Route::get('/viewjob/{id}', 'ApplyJobController@viewjob')->middleware('authcheck');
 Route::get('/applyjob/{id}', 'ApplyJobController@applyjob')->middleware('authcheck');
 Route::post('/applyjob/submit/{id}', 'ApplyJobController@submit')->middleware('authcheck');
+
+

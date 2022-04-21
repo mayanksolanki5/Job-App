@@ -14,4 +14,6 @@ class Createjob extends Model
     {
         return $this->hasMany(applyJob::class);
     }
+
+    
 }   

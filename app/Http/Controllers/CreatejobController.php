@@ -8,6 +8,7 @@ use App\Functional;
 use App\Category;
 use App\applyJob;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
 
 
 class CreatejobController extends Controller
@@ -22,8 +23,9 @@ class CreatejobController extends Controller
 
     public function submitjob(Request $request)
     {
-     
+
             $data = new Createjob();
+            $data->user_id = Auth::id();
             $data->job_title = $request->job_title;
             $data->job_description = $request->job_description;
             $data->location = $request->location;
@@ -85,8 +87,11 @@ class CreatejobController extends Controller
     
     public function updatejob(Request $request,$id){
         
+        $user_id = Auth::id(); 
+
         Createjob::where('id', $id)
                 ->update(['job_title' => $request->input('job_title'),
+                         'user_id'=>$user_id,
                          'job_description'=>$request->input('job_description'),
                          'location'=>$request->input('location'),
                          'functional_id'=>$request->input('functional_area'),
