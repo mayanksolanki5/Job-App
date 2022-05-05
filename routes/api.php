@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::apiResource('/register', 'api\RegisterController')->middleware('auth:api');
+
+Route::apiResource('/functional', 'api\FunctionalAPIController')->middleware('auth:api');
+
+Route::apiResource('/category', 'api\CategoryAPIController')->middleware('auth:api');
+
+Route::apiResource('/createjob', 'api\CreatejobAPIController')->middleware('auth:api');
+
+Route::apiResource('/applyjob', 'api\ApplyjobAPIController')->middleware('auth:api');
