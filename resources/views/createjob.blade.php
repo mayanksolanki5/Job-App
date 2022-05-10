@@ -140,7 +140,7 @@
                                 <label for="gender">{{ __('Gender Preference') }}</label>
                                 
                                 <select class="form-select" name="gender">
-                                    <option value="any" selected>Any</opti  on>
+                                    <option value="any" selected>Any</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>     
